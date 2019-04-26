@@ -15,10 +15,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-
 import dagger.android.support.AndroidSupportInjection;
-import io.fabric.sdk.android.services.common.CommonUtils;
 
 
 public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseViewModel> extends Fragment {
