@@ -1,16 +1,19 @@
 package com.dev.projecttemplate.di.module;
 
 import android.app.Application;
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.res.Resources;
 
 import com.dev.projecttemplate.R;
 import com.dev.projecttemplate.data.AppDataManager;
 import com.dev.projecttemplate.data.DataManager;
+import com.dev.projecttemplate.data.local.database.AppDatabase;
 import com.dev.projecttemplate.data.local.database.AppDatabaseHelper;
 import com.dev.projecttemplate.data.local.database.DbHelper;
 import com.dev.projecttemplate.data.local.preference.AppPreferenceHelper;
 import com.dev.projecttemplate.data.local.preference.PreferenceHelper;
+import com.dev.projecttemplate.data.remote.ApiService;
 import com.dev.projecttemplate.di.DatabaseInfo;
 import com.dev.projecttemplate.di.PreferenceInfo;
 import com.dev.projecttemplate.ui.custom.AnnotationExclusionStrategy;
@@ -94,6 +97,21 @@ public class AppModule {
     @Singleton
     Context provideContext(Application application) {
         return application;
+    }
+
+    @Provides
+    @Singleton
+    ApiService provideApiServices(Retrofit retrofit) {
+        return retrofit.create( ApiService.class );
+    }
+
+
+    @Provides
+    @Singleton
+    AppDatabase provideAppDatabase(@DatabaseInfo String dbName, Context context) {
+        return Room.databaseBuilder( context, AppDatabase.class, dbName ).fallbackToDestructiveMigration()
+                .build();
+
     }
 
     @Provides
