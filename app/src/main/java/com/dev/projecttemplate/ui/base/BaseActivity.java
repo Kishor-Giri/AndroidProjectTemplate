@@ -178,7 +178,6 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
         }
     }
 
-
     @Override
     protected void onStop() {
         super.onStop();
